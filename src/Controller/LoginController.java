@@ -34,4 +34,11 @@ public class LoginController extends Staff {
         if(Result != null || !"".equals(Result)) return Result;
         return null;
     }
+    
+//    Get Position User
+    public String getRoleUser(String Email, String Password) {
+        String result = _loginModel.getRoleUser(Email, Password);
+        if(result != null || !"".equals(result)) return result;
+        return null;
+    }
 }

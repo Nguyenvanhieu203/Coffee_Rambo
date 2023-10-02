@@ -86,4 +86,28 @@ public class LoginModel extends ConnectToSql {
         
         return staffName;
     }
+    
+    public String getRoleUser(String Email , String pass) {
+        String Position = "";
+        String query = "select Position from Staffs where Email = ? and PasswordHas = ?;";
+        try{
+            PreparedStatement prepare = con.prepareStatement(query);
+            prepare.setString(1, Email); // Đặt tham số thay thế cho dấu ? trong câu lệnh SQL
+            prepare.setString(2, pass); // Đặt tham số thay thế cho dấu ? trong câu lệnh SQL
+
+            // Thực hiện truy vấn SELECT và lưu kết quả vào ResultSet
+            ResultSet resultSet = prepare.executeQuery();
+            if (resultSet.next()) {
+                // Lấy giá trị từ cột 'Id'
+                Position = resultSet.getString("Position");
+
+            }
+          
+        }catch(Exception ex){
+            ex.printStackTrace();
+  
+        }
+        
+        return Position;
+    }
 }

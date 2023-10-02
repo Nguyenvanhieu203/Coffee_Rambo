@@ -24,6 +24,8 @@ public class Staff implements Serializable {
     public Date hireDate;
     public double salary;
     public String position;
+    
+    public static String FullName;
 
     public Staff(){
         

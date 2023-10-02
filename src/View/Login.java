@@ -17,7 +17,8 @@ import javax.swing.JTextField;
  * @author nguye
  */
 public class Login extends javax.swing.JFrame {
-    public String FullNameStaff;
+    public static String FullNameStaff;
+    public static String Role;
     /**
      * Creates new form Login
      */
@@ -120,8 +121,12 @@ public class Login extends javax.swing.JFrame {
         staff.setPasswordHas(PassWord);
         if(loginController.Login(staff)) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            // Get FullName
             FullNameStaff =  loginController.GetFullNameStaff(UserName, PassWord);
+            Role = loginController.getRoleUser(UserName, PassWord);
             staff.setFullName(UserName);
+            // Get Role
+            
             HomeStaff HomeStaffFrame = new HomeStaff();
             HomeStaffFrame.setVisible(true);
             this.setVisible(false);
@@ -164,7 +169,6 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
