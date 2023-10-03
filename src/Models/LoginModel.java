@@ -46,7 +46,7 @@ public class LoginModel extends ConnectToSql {
             prepare.setString(1, staff.firstName);
             prepare.setString(2, staff.lastName);
             prepare.setString(3, staff.firstName + " " + staff.lastName); // Tạo FullName bằng cách kết hợp FirstName và LastName
-            prepare.setDate(4, (Date) staff.dob);
+            prepare.setDate(4, (Date)staff.dob);
             prepare.setString(5, staff.Email);
             prepare.setString(6, staff.passwordHas);
             prepare.setString(7, staff.gender);

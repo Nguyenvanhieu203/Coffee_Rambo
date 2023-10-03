@@ -19,7 +19,7 @@ public class ConnectToSql {
         try{
             String user = "sa";
             String pass = "Abc123456789";
-            String url = "jdbc:sqlserver://LAPTOP-3G1S9DG3:1433;databaseName=CoffeShop;trustServerCertificate=true;";
+            String url = "jdbc:sqlserver://LAPTOP-3G1S9DG3:1433;databaseName=CoffeeRambo;trustServerCertificate=true;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(url, user, pass);
         }catch(Exception ex){

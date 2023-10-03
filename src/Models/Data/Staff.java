@@ -12,7 +12,7 @@ import java.util.Date;
  * @author nguye
  */
 public class Staff implements Serializable {
-    public static int iD = 100;
+    public int iD ;
     public String firstName;
     public String lastName;
     public String fullName;
@@ -24,32 +24,35 @@ public class Staff implements Serializable {
     public Date hireDate;
     public double salary;
     public String position;
+    public int State;
     
     public static String FullName;
 
     public Staff(){
         
     }
-    public Staff(String firstName, String lastName, String fullName, Date dob, int phoneNumber, String Email, String passwordHas, String gender, Date hireDate, double salary, String position) {
+    public Staff(int Id,String firstName, String lastName, String fullName, Date dob, int phoneNumber, String Email, String passwordHas, String gender, Date hireDate, double salary, String position, int State) {
+        this.iD = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = fullName;
         this.dob = dob;
-        this.phoneNumber = phoneNumber;
-        this.Email = Email;
         this.passwordHas = passwordHas;
+        this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.hireDate = hireDate;
         this.salary = salary;
         this.position = position;
+        this.Email = Email;
+        this.State = State;
     }
 
-    public static int getiD() {
+    public int getiD() {
         return iD;
     }
 
-    public static void setiD(int iD) {
-        Staff.iD = iD;
+    public void setiD(int iD) {
+        this.iD = iD;
     }
 
     public String getFirstName() {
@@ -137,5 +140,13 @@ public class Staff implements Serializable {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+    
+    public int getState() {
+        return State;
+    }
+    
+    public void setState(int State) {
+        this.State = State;
     }
 }

@@ -48,7 +48,7 @@ public class HomeStaff extends javax.swing.JFrame  {
         LocalDate currentDate = LocalDate.now();
         String DateString = currentDate.toString();
         jLabel2.setText("Ngày hiện tại: " + DateString);
-        if(Login.Role == "Admin") {
+        if("Admin".equals(Login.Role)) {
             MenuManager.setVisible(true);
             HRM.setVisible(true);
             Report_Sales.setVisible(true);
@@ -92,6 +92,11 @@ public class HomeStaff extends javax.swing.JFrame  {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MenuManager.setText("Quản lý thực đơn");
+        MenuManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuManagerActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Thông tin cá nhân");
 
@@ -153,6 +158,11 @@ public class HomeStaff extends javax.swing.JFrame  {
         jLabel5.setText("Xin chào: ");
 
         HRM.setText("Quản lý nhân sự");
+        HRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HRMActionPerformed(evt);
+            }
+        });
 
         Report_Sales.setText("Báo cáo doanh thu");
 
@@ -259,6 +269,20 @@ public class HomeStaff extends javax.swing.JFrame  {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void MenuManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuManagerActionPerformed
+        // TODO add your handling code here:
+        MenuManager MenuManagerFrame = new MenuManager();
+        MenuManagerFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_MenuManagerActionPerformed
+
+    private void HRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HRMActionPerformed
+        // TODO add your handling code here:
+        HrManager hrManagerFrame = new HrManager();
+        hrManagerFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HRMActionPerformed
 
     /**
      * @param args the command line arguments
