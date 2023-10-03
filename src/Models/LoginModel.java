@@ -110,4 +110,18 @@ public class LoginModel extends ConnectToSql {
         
         return Position;
     }
+    public static void main(String[] args){
+        LoginModel loginModel = new LoginModel();
+        Staff a = new Staff();
+        a.Email = "AnhMinh0203@gmail.com";
+        a.passwordHas = "MinhLe0203";
+        System.out.print(a.Email);
+        System.out.print(a.passwordHas);
+        if(loginModel.Login(a)){
+            System.out.print("Ok");
+        }
+        else{
+            System.out.print("Fail");
+        }
+    }
 }

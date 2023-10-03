@@ -48,7 +48,7 @@ public class HomeStaff extends javax.swing.JFrame  {
         LocalDate currentDate = LocalDate.now();
         String DateString = currentDate.toString();
         jLabel2.setText("Ngày hiện tại: " + DateString);
-        if(Login.Role == "Admin") {
+        if("Admin".equals(Login.Role)) {
             MenuManager.setVisible(true);
             HRM.setVisible(true);
             Report_Sales.setVisible(true);

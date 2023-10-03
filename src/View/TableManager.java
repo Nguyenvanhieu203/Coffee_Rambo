@@ -7,6 +7,7 @@ package View;
 import Controller.TableFoodController;
 import Models.Data.TableFood;
 import Models.TableFoodModel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,6 +27,7 @@ public class TableManager extends javax.swing.JFrame {
     /**
      * Creates new form TableManager
      */
+    public static boolean check = false;
     public TableManager() {
         initComponents();
         setTitle("Quản lý bàn ");
@@ -82,6 +84,9 @@ public class TableManager extends javax.swing.JFrame {
                     String tableName = table.getTableName();
                     tableFoodName = table.getTableName();
                     CustomerRequest request = new CustomerRequest(tableName);
+                    if(!check){
+                       tableButton.setBackground(Color.green);
+                    }
                     request.setVisible(true);
                 }
             });

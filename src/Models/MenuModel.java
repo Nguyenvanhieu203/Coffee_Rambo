@@ -28,6 +28,7 @@ public class MenuModel extends ConnectToSql {
                         result.getInt(2),
                         result.getString(3),
                         result.getDouble(4)));
+//                        result.getString(5);
             }
             return listDrink;
             

@@ -4,8 +4,17 @@
  */
 package View;
 
+import Controller.BillController;
+import Controller.BillDetailController;
+import Models.BillDetailModel;
+import Models.BillModel;
+import Models.Data.Bill;
+import Models.Data.Drink;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +26,7 @@ public class CustomerRequest extends javax.swing.JFrame {
     /**
      * Creates new form CustomerRequest
      */
+    public static List<Drink> drinks;
     public CustomerRequest() {
         initComponents();
     }
@@ -60,6 +70,11 @@ public class CustomerRequest extends javax.swing.JFrame {
         });
 
         jButton2.setText("Thanh toán");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Xem hóa đơn");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +147,55 @@ public class CustomerRequest extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+//       BillController bill = new BillController();
+        BillModel _billModel = new BillModel();
+        BillController _billController = new BillController(_billModel);
+        int idTable = _billController.getIdTable(tableName);
+        int idStaff = 3;
+        int idMemberShip = 1;
+        
+        Bill bill = new Bill();
+        bill.setIdTable(idTable);
+        bill.setIdStaff(idStaff);
+        bill.setIdMemberShip(idMemberShip);
+        bill.setDate("2023-04-25");
+        bill.setTotalPrice(500000);
+        _billController.AddBill(bill);
+//        if(_billController.AddBill(bill)){
+//            JOptionPane.showMessageDialog(this, "Thanh toán thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(this, "Thanh toán thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+//        }
+        
+        BillDetailModel _billDetailModel = new BillDetailModel();
+        BillDetailController _billDetailController = new BillDetailController(_billDetailModel);
+        int idBill = _billDetailController.getRecenBill();
+//        List<Drink> drinks = Orders.listDrinkChosen;
+        
+//        List<Drink> drinks = new ArrayList<>();
+//        
+//        Drink drink1 = new Drink(1,1, "Coca Cola", 2.5);
+//        Drink drink2 = new Drink(2,2, "Pepsi", 2.0);
+//        Drink drink3 = new Drink(3,3, "Sprite", 2.0);
+// 
+//
+//        drinks.add(drink1);
+//        drinks.add(drink2);
+//        drinks.add(drink3);
+
+        
+        List<Integer> quantity = Orders.listQuantity;
+        if(_billDetailController.AddBillDetail(idBill, drinks, quantity)){
+            JOptionPane.showMessageDialog(this, "Thanh toán thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            TableManager.check = false;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Thanh toán thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -23,4 +23,8 @@ public class MenuController {
         if(resultList != null) return resultList;
     return null;
     }
+    
+    public void fillTypeDrinkForCombobox(String combobox){
+        
+    }
 }
