@@ -5,6 +5,8 @@
 package Controller;
 
 import Models.Data.Drink;
+import Models.Data.DrinkType;
+import Models.Data.Menu;
 import Models.MenuModel;
 import java.util.List;
 
@@ -21,7 +23,33 @@ public class MenuController {
     public List<Drink> getAllMenuDrink() {
         List<Drink> resultList = _menuModel.showMenu();
         if(resultList != null) return resultList;
-    return null;
+        return null;
+    }
+    public List<Menu> getAllMenuManager() {
+        List<Menu> resultList = _menuModel.getMenuManager();
+        if(resultList != null) return resultList;
+        return null;
+    }
+    
+//    Insert Food
+    public boolean AddFood(Menu menu) {
+        boolean result = _menuModel.AddFood(menu);
+        return result;
+    }
+//    Get all Drink type
+    public List<DrinkType> getAllDrinkType() {
+        List<DrinkType> resultList = _menuModel.getAlldrinkType();
+        return resultList;
+    }
+//    Get Food By Id
+    public Menu getFoodById(int Id) {
+        Menu resultList = _menuModel.GetFoodById(Id);
+        return resultList;
+    }
+//    Update Food By Id
+    public boolean UpdateFood(Menu menu) {
+        boolean result = _menuModel.UpdateFood(menu);
+        return result;
     }
     
     public void fillTypeDrinkForCombobox(String combobox){

@@ -7,9 +7,11 @@ package View;
 import Controller.MenuController;
 import Models.Data.Drink;
 import Models.MenuModel;
+import static java.awt.Color.green;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,7 +20,15 @@ import javax.swing.table.DefaultTableModel;
  * @author nguye
  */
 public class Orders extends javax.swing.JFrame {
-
+//
+    private TableManager _tableManagerForm;
+    private JButton _button;
+    public void setTableManagerForm(TableManager form){
+        this._tableManagerForm = form;
+    }
+    public void setButton (JButton button){
+        this._button = button;
+    }
     /**
      * Creates new form Orders
      */
@@ -68,6 +78,7 @@ public class Orders extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +119,13 @@ public class Orders extends javax.swing.JFrame {
 
         jLabel2.setText("Loại");
 
+        jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +138,6 @@ public class Orders extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(200, 200, 200))
@@ -129,6 +146,12 @@ public class Orders extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(69, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,42 +164,22 @@ public class Orders extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    boolean check = false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          Quantity quantityForm = new Quantity();
-          quantityForm.setVisible(true);
-//          for(Integer i : listQuantity){
-//              System.out.print(i);
-//          }
-//        int quantity = QuantityDrink.quantity;
-//
-//        BillManager controllerBill = new BillManager();
-//        String tableName = TableManager.tableFoodName;
-//        String staffName = HomeStaff.nameStaff;
-//        LocalDate currentDate = LocalDate.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//        String formattedDate = currentDate.format(formatter);
-//
-//        double totalPrice = 10000;
-//        //
-//        int idTable = controllerBill.getIdTable(tableName);
-//        int idStaff = controllerBill.getIdStaff(staffName);
-//
-//        BillModel bill = new BillModel();
-//        bill.setIdStaff(idStaff);
-//        bill.setIdTable(idTable);
-//        bill.setTotalPrice(totalPrice);
-//        bill.setCreateDate(formattedDate);
-//        controllerBill.addBill(bill);
+        check = true;  
+        Quantity quantityForm = new Quantity();
+        quantityForm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public static Drink dr;
     private void jTbl_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbl_MenuMouseClicked
         int selectedRow = jTbl_Menu.getSelectedRow();
         if (selectedRow != -1) {
@@ -188,15 +191,23 @@ public class Orders extends javax.swing.JFrame {
 
             // Tạo đối tượng Drink từ các giá trị
             Drink selectedDrink = new Drink(id, idType, nameDrink, price);
-
+            dr = selectedDrink;
             // Thêm selectedDrink vào danh sách
 //            listDrinkChosen.add(selectedDrink);
-            if (CustomerRequest.drinks == null) {
-                CustomerRequest.drinks = new ArrayList<>();
-            }
-            CustomerRequest.drinks.add(selectedDrink);
+//            if (CustomerRequest.drinks == null) {
+//                CustomerRequest.drinks = new ArrayList<>();
+//            }
+//            CustomerRequest.drinks.add(selectedDrink);
         }
     }//GEN-LAST:event_jTbl_MenuMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+           if(check == true){
+               _tableManagerForm.changeColor(_button,green);
+           }
+          this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +250,7 @@ public class Orders extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

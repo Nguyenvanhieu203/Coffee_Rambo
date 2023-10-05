@@ -85,8 +85,13 @@ public class Quantity extends javax.swing.JFrame {
         if (Orders.listQuantity == null) {
             Orders.listQuantity = new ArrayList<>();
         }
-        TableManager.check = true;
+//        TableManager.check = true;
         Orders.listQuantity.add(quantityOfItem);
+        
+        if (CustomerRequest.drinks == null) {
+                CustomerRequest.drinks = new ArrayList<>();
+            }
+        CustomerRequest.drinks.add(Orders.dr);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

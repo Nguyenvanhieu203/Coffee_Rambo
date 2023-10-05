@@ -14,7 +14,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -27,7 +30,7 @@ public class TableManager extends javax.swing.JFrame {
     /**
      * Creates new form TableManager
      */
-    public static boolean check = false;
+//    public static boolean check = false;
     public TableManager() {
         initComponents();
         setTitle("Quản lý bàn ");
@@ -35,66 +38,84 @@ public class TableManager extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        refreshTableLayout();
+    
+    }
+    public static JButton jButtonTransform;
+    public static String tableFoodName;
+    public void changeColor(JButton button, Color color){
+        button.setBackground(color);
+    }
+    public JButton getButton(JButton button){
+        return button;
+    }
+
+    private static Map<String, Color> tableColors = new HashMap<>();
+    
+    public static void updateTableColor(String tableName, Color color) {
+        tableColors.put(tableName, color);
     }
     
-    public static String tableFoodName;
+    
     private void refreshTableLayout() {
         String floor = jCbb_floor.getSelectedItem().toString();
         TableFood  tableFood = new TableFood();
         TableFoodModel tableFoodModel = new TableFoodModel();
         TableFoodController tableFoodController = new TableFoodController(tableFoodModel);
+
         // Lấy danh sách các bàn từ cơ sở dữ liệu ứng với số tầng được chọn
         List<TableFood> listTable = tableFoodController.GetTableFood(floor);
 
         // Xoá tất cả các button (bàn) trong panel
         jPanel1.removeAll();
 
-        
         // Thiết lập GridLayout cho jPanel1
-        
-        GridBagLayout GridBagLayout = new GridBagLayout();
-        jPanel1.setLayout(GridBagLayout);
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        jPanel1.setLayout(gridBagLayout);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10,10,10,10);
-//       
+        gbc.insets = new Insets(10, 10, 10, 10);
+
         int buttonWidth = 110;
         int buttonHeight = 80;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        
-//        int numRows = (listTable.size()+4)/5;
-//        int numColumns = 5;
 
         int numRows = (listTable.size() + 5) / 6; // Số hàng tính theo mỗi 6 nút
         int numColumns = 6; // Số cột
 
         int buttonCount = 0; // Biến đếm số lượng nút đã thêm vào
-        
-
 
         for (TableFood table : listTable) {
-            JButton tableButton = new JButton(table.getTableName());
-            tableButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+            JButton jButton1  = new JButton(table.getTableName());
+            jButton1.setBackground(Color.white);
+            jButton1.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
             gbc.anchor = GridBagConstraints.WEST;
-            
-            
-            tableButton.addActionListener(new ActionListener() {
+
+            // Kiểm tra xem tên bàn có trong Map không
+            if (tableColors.containsKey(table.getTableName())) {
+                jButton1.setBackground(tableColors.get(table.getTableName())); // Cài đặt màu từ Map
+            } else {
+                jButton1.setBackground(Color.white); // Màu mặc định
+            }
+
+            jButton1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String tableName = table.getTableName();
-                    tableFoodName = table.getTableName();
+                    tableFoodName = table.getTableName(); // tạo biến toàn cục chứa tên bàn
                     CustomerRequest request = new CustomerRequest(tableName);
-                    if(!check){
-                       tableButton.setBackground(Color.green);
-                    }
+                    request.setButton(jButton1);
+                    request.setTableManagerForm(TableManager.this);
                     request.setVisible(true);
+
+                    // Khi bàn được chọn, cập nhật trạng thái màu trong Map
+                    tableColors.put(tableName, Color.GREEN); // Ví dụ màu xanh khi bàn đang có khách
                 }
             });
-            jPanel1.add(tableButton, gbc);
+            jPanel1.add(jButton1, gbc);
 
             buttonCount++; // Tăng biến đếm sau khi thêm nút
 
-            // Nếu đã thêm 6 nút, xuống dòng
+            // Nếu đã thêm đủ số cột, xuống dòng
             if (buttonCount == numColumns) {
                 gbc.gridwidth = GridBagConstraints.REMAINDER; // Xuống dòng mới
                 buttonCount = 0; // Reset biến đếm về 0
@@ -103,11 +124,11 @@ public class TableManager extends javax.swing.JFrame {
             }
         }
         jPanel1.setPreferredSize(new Dimension(680, 270));
-//        jPanel1.setSize(620, 385);
         // Cập nhật lại giao diện
         jPanel1.revalidate();
         jPanel1.repaint();
     }
+
     
 
     /**
@@ -135,8 +156,8 @@ public class TableManager extends javax.swing.JFrame {
         jCbb_floor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,13 +226,23 @@ public class TableManager extends javax.swing.JFrame {
         jLabel1.setText("HIển thị theo");
 
         jButton12.setText("Thêm bàn");
-
-        jButton13.setText("Xóa bàn");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("Làm mới");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("Trang chủ");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
             }
         });
 
@@ -226,9 +257,9 @@ public class TableManager extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -237,7 +268,7 @@ public class TableManager extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCbb_floor, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,9 +284,9 @@ public class TableManager extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(128, Short.MAX_VALUE))
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,6 +302,18 @@ public class TableManager extends javax.swing.JFrame {
         refreshTableLayout();
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        AddTable addTableForm = new AddTable();
+        addTableForm.setVisible(true);
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        HomeStaff home = new HomeStaff();
+        home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton13ActionPerformed
+    
     /**
      * @param args the command line arguments
      */

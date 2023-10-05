@@ -20,6 +20,7 @@ public class ConnectToSql {
             String user = "sa";
             String pass = "020303";
             String url = "jdbc:sqlserver://MinhLe\\SQL2022:1433;databaseName=CoffeShop;trustServerCertificate=true";
+
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(url, user, pass);
         }catch(Exception ex){
@@ -27,32 +28,32 @@ public class ConnectToSql {
         }
     }
     
-    public static void main(String[] args) {
-        ConnectToSql connect = new ConnectToSql();
-        
-        if (connect.con != null) {
-            try {
-                String query = "select * from Staffs where PhoneNumber = '869819316' and PasswordHas = 'MinhLe0203'";
-
-                // Tạo PreparedStatement
-                PreparedStatement prepare = connect.con.prepareStatement(query); 
-
-                // Thực hiện truy vấn
-                ResultSet result = prepare.executeQuery();
-
-                if (result.next()) {
-                    System.out.println("okela");
-                } else {
-                    System.out.println("Không có dữ liệu.");
-                }
-
-                result.close();
-                prepare.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            System.out.println("Không thể kết nối đến cơ sở dữ liệu.");
-        }
-    }
+//    public static void main(String[] args) {
+//        ConnectToSql connect = new ConnectToSql();
+//        
+//        if (connect.con != null) {
+//            try {
+//                String query = "select * from Staffs where PhoneNumber = '869819316' and PasswordHas = 'MinhLe0203'";
+//
+//                // Tạo PreparedStatement
+//                PreparedStatement prepare = connect.con.prepareStatement(query); 
+//
+//                // Thực hiện truy vấn
+//                ResultSet result = prepare.executeQuery();
+//
+//                if (result.next()) {
+//                    System.out.println("okela");
+//                } else {
+//                    System.out.println("Không có dữ liệu.");
+//                }
+//
+//                result.close();
+//                prepare.close();
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        } else {
+//            System.out.println("Không thể kết nối đến cơ sở dữ liệu.");
+//        }
+//    }
 }

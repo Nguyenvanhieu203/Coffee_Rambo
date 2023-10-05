@@ -125,6 +125,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; th&#x1ef1;c &#x111;&#x1a1;n"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuManagerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -215,16 +218,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n s&#x1ef1;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HRMActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Report_Sales">
       <Properties>
         <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o doanh thu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Report_SalesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Invoice_statistics">
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea; h&#xf3;a &#x111;&#x1a1;n"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Invoice_statisticsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton9">
       <Properties>

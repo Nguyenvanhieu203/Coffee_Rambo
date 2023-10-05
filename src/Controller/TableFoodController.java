@@ -24,4 +24,16 @@ public class TableFoodController {
         if(result == null ) return null;
         return result;
     }
+    
+    public boolean addTable(TableFood tableFood){
+        boolean result = _tableFoodModel.addTableFood(tableFood);
+        if(result) return true;
+        return false;
+    }
+    
+    public boolean deleteTable(TableFood tableFood){
+        boolean result = _tableFoodModel.dropTable(tableFood);
+        if(result) return true;
+        return false;
+    }
 }

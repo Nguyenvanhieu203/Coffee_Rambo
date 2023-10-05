@@ -6,10 +6,16 @@ package View;
 
 import Controller.BillController;
 import Controller.BillDetailController;
+import Controller.TableFoodController;
 import Models.BillDetailModel;
 import Models.BillModel;
 import Models.Data.Bill;
 import Models.Data.Drink;
+import Models.Data.TableFood;
+import Models.TableFoodModel;
+import java.awt.Color;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -21,8 +27,17 @@ import javax.swing.JOptionPane;
  * @author nguye
  */
 public class CustomerRequest extends javax.swing.JFrame {
-    private JButton tableButtonReference; 
+    private JButton tableButtonReference; // Chuyển sang màu xanh
+   
     private String tableName;
+ 
+    private TableManager settableManager;
+    public void setTableManagerForm(TableManager form){
+        this.settableManager = form;
+    }
+    public void setButton(JButton button){
+        this.tableButtonReference = button;
+    }
     /**
      * Creates new form CustomerRequest
      */
@@ -55,6 +70,7 @@ public class CustomerRequest extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLbl_nameTable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,18 +99,27 @@ public class CustomerRequest extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Xóa bàn");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(29, 29, 29)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +128,8 @@ public class CustomerRequest extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -117,21 +143,21 @@ public class CustomerRequest extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jLbl_nameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jLbl_nameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(17, 17, 17)
                 .addComponent(jLbl_nameTable, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,8 +166,11 @@ public class CustomerRequest extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Orders order = new Orders();
+        order.setTableManagerForm(settableManager);
+        order.setButton(tableButtonReference);
         order.setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -150,18 +179,42 @@ public class CustomerRequest extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 //       BillController bill = new BillController();
+        if(drinks == null){
+            JOptionPane.showMessageDialog(this, "Bàn chưa gọi đồ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
         BillModel _billModel = new BillModel();
         BillController _billController = new BillController(_billModel);
         int idTable = _billController.getIdTable(tableName);
         int idStaff = 3;
         int idMemberShip = 1;
         
+        // get currentDate
+        LocalDate today = LocalDate.now();
+        // Định dạng ngày thành chuỗi "yyyy-MM-dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+        
+        //Get total price
+//         Orders.listQuantity;
+//        CustomerRequest.drinks;
+
+        double totalPrice = 0;
+        System.out.print(drinks.size());
+        System.out.println();
+        System.out.print(Orders.listQuantity.size());
+        
+        for(int i = 0; i< drinks.size();i++){
+            totalPrice += drinks.get(i).getPrice()*Orders.listQuantity.get(i);
+        }
+        if(totalPrice > 1000000){
+            JOptionPane.showMessageDialog(this, "Bạn muốn trở thành khách hàng thành viên ?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
         Bill bill = new Bill();
         bill.setIdTable(idTable);
         bill.setIdStaff(idStaff);
         bill.setIdMemberShip(idMemberShip);
-        bill.setDate("2023-04-25");
-        bill.setTotalPrice(500000);
+        bill.setDate(formattedDate);
+        bill.setTotalPrice(totalPrice);
         _billController.AddBill(bill);
 //        if(_billController.AddBill(bill)){
 //            JOptionPane.showMessageDialog(this, "Thanh toán thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -189,13 +242,32 @@ public class CustomerRequest extends javax.swing.JFrame {
         
         List<Integer> quantity = Orders.listQuantity;
         if(_billDetailController.AddBillDetail(idBill, drinks, quantity)){
-            JOptionPane.showMessageDialog(this, "Thanh toán thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            TableManager.check = false;
-        }
-        else{
+            Color buttonColor = tableButtonReference.getBackground();
+            if (Color.WHITE.equals(buttonColor)) {
+                JOptionPane.showMessageDialog(this, "Bàn chưa gọi đồ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Thanh toán thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                settableManager.changeColor(tableButtonReference, Color.WHITE);
+                TableManager.updateTableColor(TableManager.tableFoodName, Color.WHITE);
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Thanh toán thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        TableFood tableFood = new TableFood();
+        tableFood.setTableName(tableName);
+        
+        TableFoodModel _tableFoodModel = new TableFoodModel();
+        TableFoodController controller = new TableFoodController(_tableFoodModel);
+        if(controller.deleteTable(tableFood)){
+            JOptionPane.showMessageDialog(this, "Xóa bàn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Xóa bàn thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +308,7 @@ public class CustomerRequest extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLbl_nameTable;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

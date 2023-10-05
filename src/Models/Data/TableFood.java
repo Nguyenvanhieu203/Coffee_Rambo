@@ -10,15 +10,15 @@ package Models.Data;
  */
 public class TableFood {
     private int iD;
-    private int idFloor;
+    private String floor;
     private String tableName;
 
     public TableFood(){
         
     }
-    public TableFood(int iD, String tableName) {
-        this.iD = iD;
+    public TableFood( String tableName , String floor) {
         this.tableName = tableName;
+        this.floor = floor;
     }
 
     public int getiD() {
@@ -29,6 +29,14 @@ public class TableFood {
         this.iD = iD;
     }
 
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
     public String getTableName() {
         return tableName;
     }
@@ -36,5 +44,7 @@ public class TableFood {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
+
+    
     
 }
