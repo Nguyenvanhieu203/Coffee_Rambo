@@ -157,5 +157,36 @@ public class MenuModel extends ConnectToSql {
         }
         return result;
     }
+    
+//    Find 
+    public List<Menu> FindMenuById(String Id) {
+        List<Menu> listMenu = new ArrayList<>();
+        String query = "SELECT d.Id, d.NameDrink, d.Price, dt.NameType, d.State FROM Drinks d JOIN DrinkType dt ON d.IdType = dt.Id WHERE d.Id LIKE ? OR d.NameDrink LIKE ? OR dt.NameType LIKE ?";
+
+        try {
+            PreparedStatement prepare = con.prepareStatement(query);
+            prepare.setString(1, "%" + Id + "%"); // Set Id parameter with wildcards
+            prepare.setString(2, "%" + Id + "%"); // Set NameDrink parameter with wildcards
+            prepare.setString(3, "%" + Id + "%"); // Set NameType parameter with wildcards
+
+            ResultSet result = prepare.executeQuery();
+
+            while (result.next()) {
+                listMenu.add(new Menu(
+                        result.getInt(1),
+                        result.getString(2),
+                        result.getDouble(3),
+                        result.getString(4),
+                        result.getInt(5)
+                    )
+                );
+            }
+            return listMenu;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
 }
 

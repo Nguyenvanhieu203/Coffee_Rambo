@@ -8,10 +8,13 @@ import Controller.MenuController;
 import Models.Data.Drink;
 import Models.Data.Menu;
 import Models.MenuModel;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -31,6 +34,10 @@ public class MenuManager extends javax.swing.JFrame {
         Menu menu = new Menu();
         List<Menu> listMenu = menuController.getAllMenuManager();
         DefaultTableModel model = (DefaultTableModel)jTbl_Menu.getModel();
+        
+        TableColumnModel columnModel = jTbl_Menu.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(5);
+        
         int i = 0;
         for(Menu o : listMenu){
             String status;
@@ -68,6 +75,7 @@ public class MenuManager extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btn__Exit = new javax.swing.JButton();
+        btn_Search = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +95,7 @@ public class MenuManager extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTbl_Menu.setName(""); // NOI18N
         jTbl_Menu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTbl_Menu);
 
@@ -122,6 +131,13 @@ public class MenuManager extends javax.swing.JFrame {
             }
         });
 
+        btn_Search.setText("Tìm kiếm");
+        btn_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,25 +157,27 @@ public class MenuManager extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(108, 108, 108)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(btn_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
                                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btn__Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(59, 59, 59)))
+                        .addGap(10, 10, 10)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_QuantityFood)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton2)
                     .addComponent(jButton1)
@@ -168,7 +186,9 @@ public class MenuManager extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(161, 161, 161)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Search))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,6 +224,62 @@ public class MenuManager extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm bạn muốn sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        // TODO add your handling code here:
+        if(txtSearch.getText() == null || txtSearch.getText() == "") {
+            MenuModel menuModel = new MenuModel();
+            MenuController menuController = new MenuController(menuModel);
+            Menu menu = new Menu();
+            List<Menu> listMenu = menuController.getAllMenuManager();
+            DefaultTableModel model = (DefaultTableModel)jTbl_Menu.getModel();
+            int i = 0;
+            for(Menu o : listMenu){
+                String status;
+                if (o.getStatus() == 0) {
+                    status = "Đang kinh doanh";
+                } else {
+                    status = "Tạm dừng bán";
+                }
+                model.addRow(new Object[] {
+                    o.getId(),
+                    o.getNameDrink(),
+                    o.getPrice(),
+                    o.getNameType(),
+                    status
+                });
+                i++;
+            }
+            lbl_QuantityFood.setText("Số món ăn đang kinh doanh: "+i);
+        }
+        else {
+            MenuModel menuModel = new MenuModel();
+            MenuController menuController = new MenuController(menuModel);
+            Menu menu = new Menu();
+            List<Menu> listMenu = menuController.FindMenuById(txtSearch.getText());
+            DefaultTableModel model = (DefaultTableModel)jTbl_Menu.getModel();
+            model.setRowCount(0);
+            
+            int i = 0;
+            for(Menu o : listMenu){
+                String status;
+                if (o.getStatus() == 0) {
+                    status = "Đang kinh doanh";
+                } else {
+                    status = "Tạm dừng bán";
+                }
+                model.addRow(new Object[] {
+                    o.getId(),
+                    o.getNameDrink(),
+                    o.getPrice(),
+                    o.getNameType(),
+                    status
+                });
+                i++;
+            }
+            lbl_QuantityFood.setText("Số món ăn đang kinh doanh: "+i);
+        }
+    }//GEN-LAST:event_btn_SearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +317,7 @@ public class MenuManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Search;
     private javax.swing.JButton btn__Exit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

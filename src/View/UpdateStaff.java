@@ -47,6 +47,7 @@ public class UpdateStaff extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         lbl_AddFood1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,55 +75,190 @@ public class UpdateStaff extends javax.swing.JFrame {
         jCB_Dismissal = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         lbl_AddFood1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbl_AddFood1.setText("Sửa nhân viên");
-        getContentPane().add(lbl_AddFood1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 155, 69));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 4, 0, 0);
+        getContentPane().add(lbl_AddFood1, gridBagConstraints);
 
         jLabel2.setText("Họ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 66, 20));
-        getContentPane().add(lbl__FirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 162, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 180, 0, 0);
+        getContentPane().add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 98;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 180, 0, 0);
+        getContentPane().add(lbl__FirstName, gridBagConstraints);
 
         jLabel3.setText("Tên");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 37, -1));
-        getContentPane().add(lbl__LastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 164, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 48, 0, 0);
+        getContentPane().add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 38;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 48, 0, 0);
+        getContentPane().add(lbl__LastName, gridBagConstraints);
 
         jLabel4.setText("Ngày sinh");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 63, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 11;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 180, 0, 0);
+        getContentPane().add(jLabel4, gridBagConstraints);
 
         jLabel6.setText("Giới tính");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 63, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 48, 0, 0);
+        getContentPane().add(jLabel6, gridBagConstraints);
 
         cbb__Gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        getContentPane().add(cbb__Gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 164, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 38;
+        gridBagConstraints.ipadx = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 48, 0, 0);
+        getContentPane().add(cbb__Gender, gridBagConstraints);
 
         jDC_DOB.setDateFormatString("dd MMM, yyyy");
-        getContentPane().add(jDC_DOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 162, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 180, 0, 0);
+        getContentPane().add(jDC_DOB, gridBagConstraints);
 
         jLabel5.setText("Số điện thoại");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 103, -1));
-        getContentPane().add(lbl__PhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 374, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 33;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 180, 0, 0);
+        getContentPane().add(jLabel5, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 51;
+        gridBagConstraints.ipadx = 310;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 180, 0, 0);
+        getContentPane().add(lbl__PhoneNumber, gridBagConstraints);
 
         jLabel12.setText("Email");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 81, -1));
-        getContentPane().add(lbl__Salary, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 374, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 51;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 180, 0, 0);
+        getContentPane().add(jLabel12, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridwidth = 51;
+        gridBagConstraints.ipadx = 310;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 180, 0, 0);
+        getContentPane().add(lbl__Salary, gridBagConstraints);
 
         jLabel13.setText("Ngày vào làm");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 81, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 180, 0, 0);
+        getContentPane().add(jLabel13, gridBagConstraints);
 
         jDC_HireDate.setDateFormatString("dd MMM, yyyy");
-        getContentPane().add(jDC_HireDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 162, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 180, 0, 0);
+        getContentPane().add(jDC_HireDate, gridBagConstraints);
 
         jLabel7.setText("Chức vụ");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 63, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 58, 0, 0);
+        getContentPane().add(jLabel7, gridBagConstraints);
 
         cbb__Position.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Thu ngân", "Phục vụ" }));
-        getContentPane().add(cbb__Position, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 158, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 52;
+        gridBagConstraints.ipadx = 75;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 58, 0, 194);
+        getContentPane().add(cbb__Position, gridBagConstraints);
 
         jLabel14.setText("Lương");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 81, -1));
-        getContentPane().add(lbl__UserName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 374, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 47;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 180, 0, 0);
+        getContentPane().add(jLabel14, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 51;
+        gridBagConstraints.ipadx = 310;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 180, 0, 0);
+        getContentPane().add(lbl__UserName1, gridBagConstraints);
 
         btn_Save.setText("Lưu");
         btn_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +266,14 @@ public class UpdateStaff extends javax.swing.JFrame {
                 btn_SaveActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 75, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 180, 64, 0);
+        getContentPane().add(btn_Save, gridBagConstraints);
 
         btn_Exit.setText("Thoát");
         btn_Exit.addActionListener(new java.awt.event.ActionListener() {
@@ -138,17 +281,45 @@ public class UpdateStaff extends javax.swing.JFrame {
                 btn_ExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 28;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 22;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 17, 64, 0);
+        getContentPane().add(btn_Exit, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setText("Mã nhân viên");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 120, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(1, 180, 0, 0);
+        getContentPane().add(jLabel8, gridBagConstraints);
 
         txt_Id.setEnabled(false);
-        getContentPane().add(txt_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 240, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 21;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 176;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(1, 10, 0, 0);
+        getContentPane().add(txt_Id, gridBagConstraints);
 
         jCB_Dismissal.setText("Sa thải");
-        getContentPane().add(jCB_Dismissal, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 85, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 26;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 180, 0, 0);
+        getContentPane().add(jCB_Dismissal, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,6 +349,7 @@ public class UpdateStaff extends javax.swing.JFrame {
         staff.setHireDate(HireDateSql);
         staff.setPosition(cbb__Position.getSelectedItem().toString());
         staff.setSalary(Double.parseDouble(lbl__Salary.getText()));
+        staff.setState(state);
         if(hrManagerController.UpdateStaff(staff)) {
             JOptionPane.showMessageDialog(this, "Sửa nhân viên thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             HrManager hrManager = new HrManager();

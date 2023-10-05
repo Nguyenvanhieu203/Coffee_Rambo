@@ -51,4 +51,9 @@ public class MenuController {
         boolean result = _menuModel.UpdateFood(menu);
         return result;
     }
+    
+    public List<Menu> FindMenuById(String Id) {
+        List<Menu> resultList = _menuModel.FindMenuById(Id);
+        return resultList;
+    }
 }

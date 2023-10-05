@@ -5,15 +5,19 @@
 package View;
 
 import Controller.LoginController;
+import Models.Data.ModelMessage;
 import Models.LoginModel;
 import Models.Data.Staff;
+import Models.ServiceMail;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +27,7 @@ import javax.swing.JPanel;
  */
 public class SignUp extends javax.swing.JFrame {
 //     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        int randomNumber = 0;
     /**
      * Creates new form SignUp
      */
@@ -107,11 +112,6 @@ public class SignUp extends javax.swing.JFrame {
                 .addContainerGap(348, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btn__SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112)
-                        .addComponent(btn__SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
@@ -143,6 +143,11 @@ public class SignUp extends javax.swing.JFrame {
                                     .addComponent(lbl__UserName, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addComponent(lbl__ConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn__SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112)
+                        .addComponent(btn__SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(144, 144, 144))))
@@ -202,6 +207,9 @@ public class SignUp extends javax.swing.JFrame {
     
     private void btn__SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn__SignUpActionPerformed
         // TODO add your handling code here:
+        Random random = new Random();
+        randomNumber = random.nextInt(999999) + 1;
+        
         String firstName = lbl__FirstName.getText();
         String lastName = lbl__LastName.getText();
         
@@ -233,6 +241,7 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         else {
+            sendMail(staff);
             if(loginController.SignUp(staff)) {
                 JOptionPane.showMessageDialog(this, "Đăng ký thành công", "RThoong báo", JOptionPane.INFORMATION_MESSAGE);
                 Login LoginFrame = new Login();
@@ -245,7 +254,20 @@ public class SignUp extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn__SignUpActionPerformed
-
+    private void sendMail(Staff staff){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ModelMessage ms = new ServiceMail().sendMain(staff.getEmail(), String.valueOf(randomNumber));
+                if (ms.isSuccess()) {
+                    
+                } else {
+                    JOptionPane.showMessageDialog(SignUp.this, "Đăng ký không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }).start();
+    }
+    
     /**
      * @param args the command line arguments
      */
