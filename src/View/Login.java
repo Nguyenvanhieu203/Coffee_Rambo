@@ -54,12 +54,18 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Login");
 
         btn__Login.setLabel("Đăng nhập");
         btn__Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn__LoginActionPerformed(evt);
+            }
+        });
+        btn__Login.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btn__LoginKeyPressed(evt);
             }
         });
 
@@ -75,20 +81,19 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_UserName)
-                            .addComponent(lbl__Password, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn__Login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn__SignIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(114, 114, 114)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_UserName)
+                                .addComponent(lbl__Password, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(161, 161, 161)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btn__Login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn__SignIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,7 +109,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(btn__Login)
                 .addGap(18, 18, 18)
                 .addComponent(btn__SignIn)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,6 +147,32 @@ public class Login extends javax.swing.JFrame {
         SignUpFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn__SignInActionPerformed
+
+    private void btn__LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn__LoginKeyPressed
+        // TODO add your handling code here:
+        String UserName = lbl_UserName.getText();
+        String PassWord = lbl__Password.getText();
+        LoginModel loginModel = new LoginModel();
+        LoginController loginController = new LoginController(loginModel);
+        Staff staff = new Staff();
+        staff.setEmail(UserName);
+        staff.setPasswordHas(PassWord);
+        if(loginController.Login(staff)) {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            // Get FullName
+            FullNameStaff =  loginController.GetFullNameStaff(UserName, PassWord);
+            Role = loginController.getRoleUser(UserName, PassWord);
+            staff.setFullName(UserName);
+            // Get Role
+            
+            HomeStaff HomeStaffFrame = new HomeStaff();
+            HomeStaffFrame.setVisible(true);
+            this.setVisible(false);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn__LoginKeyPressed
 
     /**
      * @param args the command line arguments

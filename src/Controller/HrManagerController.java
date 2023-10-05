@@ -25,12 +25,22 @@ public class HrManagerController {
     }
     
     public Staff GetStaffById(int Id) {
-        Staff result = _hRManagerModel.GetFoodById(Id);
+        Staff result = _hRManagerModel.GetStaffById(Id);
         return result;
     }
     
     public boolean UpdateStaff(Staff staff) {
         boolean result = _hRManagerModel.UpdateStaff(staff);
+        return result;
+    }
+    
+    public boolean AddStaff(Staff staff) {
+        boolean result = _hRManagerModel.AddStaff(staff);
+        return result;
+    }
+    
+    public List<Staff> FindStaffById(String Id) {
+        List<Staff> result = _hRManagerModel.FindStaffById(Id);
         return result;
     }
 }

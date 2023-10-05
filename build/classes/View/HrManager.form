@@ -35,16 +35,31 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_QuantityFood" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txtSearch" min="-2" pref="203" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="btn_Search" min="-2" pref="92" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="71" max="32767" attributes="0"/>
                                       <Component id="btn_AddStaff" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <EmptySpace pref="111" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btn_UpdateStaff" min="-2" pref="116" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       <Component id="btn__Exit" min="-2" pref="116" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lbl_QuantityFood" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -65,18 +80,29 @@
               <Component id="lbl_QuantityFood" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="btn_AddStaff" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_UpdateStaff" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn__Exit" alignment="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="btn_AddStaff" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_UpdateStaff" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn__Exit" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="320" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="320" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="161" pref="161" max="-2" attributes="0"/>
-              <Component id="txtSearch" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_Search" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -87,6 +113,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Tr&#x1edf; v&#x1ec1;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn__ExitActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -156,6 +185,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#xea;m nh&#xe2;n vi&#xea;n"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AddStaffActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_Search">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SearchActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

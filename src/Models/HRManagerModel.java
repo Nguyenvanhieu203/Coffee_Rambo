@@ -79,7 +79,7 @@ public class HRManagerModel extends ConnectToSql {
         
     }
     
-    public Staff GetFoodById(int Id) {
+    public Staff GetStaffById(int Id) {
         Staff result =  null;
         String query = "SELECT * FROM Staffs WHERE Id = ?";
         try {
@@ -114,4 +114,68 @@ public class HRManagerModel extends ConnectToSql {
         }
         return result;
     }
+    
+    public boolean AddStaff(Staff staff) {
+        boolean result = false;
+        String storedProcedureCall = "{Call AddStaff(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        try(CallableStatement callableStatement = con.prepareCall(storedProcedureCall)){
+//            callableStatement.setInt(1, menu.Id);
+            callableStatement.setString(1, staff.firstName);
+            callableStatement.setString(2, staff.lastName);
+            callableStatement.setDate(3, (Date)staff.dob);
+            callableStatement.setString(4, staff.passwordHas);
+            callableStatement.setInt(5, staff.phoneNumber);
+            callableStatement.setString(6, staff.gender);
+            callableStatement.setDate(7, (Date)staff.hireDate);
+            callableStatement.setDouble(8, staff.salary);
+            callableStatement.setString(9, staff.position);
+            callableStatement.setString(10, staff.Email);
+            callableStatement.setInt(11, staff.State);
+            int RowsAffect = callableStatement.executeUpdate();
+            if(RowsAffect > 0) result = true;
+            else result = false;
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public List<Staff> FindStaffById(String Id) {
+    List<Staff> listStaff = new ArrayList<>();
+    String query = "SELECT * FROM Staffs WHERE Id LIKE ? OR FullName LIKE ?";
+    
+    try {
+        PreparedStatement prepare = con.prepareStatement(query);
+        prepare.setString(1, "%" + Id + "%"); // Set Id parameter with wildcards
+        prepare.setString(2, "%" + Id + "%"); // Set FullName parameter with wildcards
+        
+        ResultSet result = prepare.executeQuery();
+        
+        while (result.next()) {
+            listStaff.add(new Staff(
+                    result.getInt(1),
+                    result.getString(2),
+                    result.getString(3),
+                    result.getString(4),
+                    result.getDate(5),
+                    result.getInt(7),
+                    result.getString(12),
+                    result.getString(6),
+                    result.getString(8),
+                    result.getDate(9),
+                    result.getDouble(10),
+                    result.getString(11),
+                    result.getInt(13)
+                )
+            );
+        }
+        return listStaff;
+        
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
+
 }

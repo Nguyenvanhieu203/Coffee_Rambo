@@ -52,7 +52,8 @@ public class MenuController {
         return result;
     }
     
-    public void fillTypeDrinkForCombobox(String combobox){
-        
+    public List<Menu> FindMenuById(String Id) {
+        List<Menu> resultList = _menuModel.FindMenuById(Id);
+        return resultList;
     }
 }
