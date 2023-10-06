@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import java.sql.*;
 
 /**
@@ -106,6 +107,89 @@ public class MenuModel extends ConnectToSql {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public List<Drink> getDrinkByType(String typeName) {
+        List<Drink> listDrink = new ArrayList<>();
+        try {
+            String queryFindId = "";
+            if(typeName.equals("Tất cả") ){
+                queryFindId = "SELECT * FROM Drinks";
+                PreparedStatement pre = con.prepareStatement(queryFindId);
+                ResultSet rs = pre.executeQuery();
+                while (rs.next()) {
+                    listDrink.add(new Drink(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getDouble(4)));
+                }
+                return listDrink;
+            }
+            queryFindId = "SELECT id FROM DrinkType WHERE NameType = ?";
+            PreparedStatement prepare = con.prepareStatement(queryFindId); 
+            prepare.setString(1, typeName);
+            ResultSet result = prepare.executeQuery();
+
+            if (result.next()) {
+                int idType = result.getInt(1);
+                String queryFindByType = "SELECT * FROM drinks WHERE IdType = ?";
+                PreparedStatement pre = con.prepareStatement(queryFindByType);
+                pre.setInt(1, idType); // Set the IdType parameter
+                ResultSet rs = pre.executeQuery();
+
+                while (rs.next()) {
+                    listDrink.add(new Drink(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getDouble(4)));
+                }
+                return listDrink;
+            }
+
+            result.close();
+            prepare.close();
+
+            return null;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+    
+    public List<Drink> getDrinkByName(String drinkName) {
+        List<Drink> listDrink = new ArrayList<>();
+        try {
+
+            String queryFindByType = "SELECT * FROM drinks WHERE NameDrink LIKE ?";
+            PreparedStatement pre = con.prepareStatement(queryFindByType);
+            pre.setString(1, "%" + drinkName + "%"); // Set the NameDrink parameter with % for wildcard matching
+            ResultSet rs = pre.executeQuery();
+
+            while (rs.next()) {
+                listDrink.add(new Drink(rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getDouble(4)));
+            }
+            return listDrink;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+    
+    public static void main(String[] args){
+        
+        MenuModel x = new MenuModel();
+        String typeName = "Sinh tố dâu";
+        List<Drink> listDrink = x.getDrinkByName(typeName);
+        for(Drink item: listDrink){
+            System.out.print(item.getNameDrink());
+        }
     }
     
 //    Get Food By Id

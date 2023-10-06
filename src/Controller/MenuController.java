@@ -41,6 +41,14 @@ public class MenuController {
         List<DrinkType> resultList = _menuModel.getAlldrinkType();
         return resultList;
     }
+    public List<Drink> getDrinkByType(String typeName) {
+        List<Drink> resultList = _menuModel.getDrinkByType(typeName);
+        return resultList;
+    }
+    public List<Drink> getDrinkByName (String drinkName){
+        List<Drink> resultList = _menuModel.getDrinkByName(drinkName);
+        return resultList;
+    }
 //    Get Food By Id
     public Menu getFoodById(int Id) {
         Menu resultList = _menuModel.GetFoodById(Id);
