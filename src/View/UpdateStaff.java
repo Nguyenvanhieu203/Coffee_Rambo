@@ -33,7 +33,13 @@ public class UpdateStaff extends javax.swing.JFrame {
         jDC_DOB.setDate(staff.dob);
         lbl__PhoneNumber.setText(String.valueOf(staff.phoneNumber));
         lbl__UserName1.setText((staff.Email));
-        jDC_HireDate.setDate(staff.hireDate);
+        if(staff.hireDate == null) {
+            Date date = new Date();
+            jDC_HireDate.setDate(date);
+        }
+        else {
+            jDC_HireDate.setDate(staff.hireDate);
+        }
         lbl__Salary.setText(String.valueOf(staff.salary));
         
         
